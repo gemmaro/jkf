@@ -389,36 +389,37 @@ module Jkf
         s0 = @scanner.pos
         if match_str('P') == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          s2 = parse_teban
-          if s2 == :failed
-            @scanner.pos = s0
-            s0 = :failed
-          else
-            s4 = parse_xy_piece
-            if s4 == :failed
-              s3 = :failed
-            else
-              s3 = []
-              while s4 != :failed
-                s3 << s4
-                s4 = parse_xy_piece
-              end
-            end
-            if s3 == :failed
-              @scanner.pos = s0
-              s0 = :failed
-            elsif parse_nl != :failed
-              @reported_pos = s0
-              s0 = { 'teban' => s2, 'pieces' => s3 }
-            else
-              @scanner.pos = s0
-              s0 = :failed
-            end
-          end
+          return :failed
         end
-        s0
+
+        s2 = parse_teban
+        if s2 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        s4 = parse_xy_piece
+        if s4 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        s3 = []
+        while s4 != :failed
+          s3 << s4
+          s4 = parse_xy_piece
+        end
+        if s3 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+        if parse_nl == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        @reported_pos = s0
+        { 'teban' => s2, 'pieces' => s3 }
       end
 
       # moves : firstboard move* comment*

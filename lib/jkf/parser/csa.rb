@@ -752,15 +752,7 @@ module Jkf
 
       # return empty board jkf
       def generate_empty_board
-        board = []
-        9.times do |_i|
-          line = []
-          9.times do |_j|
-            line << {}
-          end
-          board << line
-        end
-        board
+        Array.new(9) { Array.new(9) { {} } }
       end
 
       # sec to time(m, s)

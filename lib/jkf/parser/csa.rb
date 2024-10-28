@@ -86,13 +86,12 @@ module Jkf
           s2 = parse_header
         end
         @reported_pos = s0
-        -> (header) do
-          ret = {}
-          header.each do |data|
-            ret[normalize_header_key(data['k'])] = data['v']
-          end
-          ret
-        end.call(s1)
+        header = s1
+        ret = {}
+        header.each do |data|
+          ret[normalize_header_key(data['k'])] = data['v']
+        end
+        ret
       end
 
       # header : comment* "$" [^:]+ ":" nonls nl

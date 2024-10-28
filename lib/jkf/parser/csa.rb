@@ -575,17 +575,17 @@ module Jkf
         s0 = @scanner.pos
         if match_str("'") == :failed
           @scanner.pos = s0
-          :failed
-        else
-          s2 = parse_nonls
-          if parse_nl == :failed
-            @scanner.pos = s0
-            :failed
-          else
-            @reported_pos = s0
-            s2.join
-          end
+          return :failed
         end
+
+        s2 = parse_nonls
+        if parse_nl == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        @reported_pos = s0
+        s2.join
       end
 
       # comments : comment*

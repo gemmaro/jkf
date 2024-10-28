@@ -457,25 +457,23 @@ module Jkf
         s1 = parse_special_move if s1 == :failed
         if s1 == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          s2 = parse_time
-          s2 = nil if s2 == :failed
-          s3 = parse_comments
-          @reported_pos = s0
-          s0 = -> (move, time, comments) do
-            ret = {}
-            ret['comments'] = comments unless comments.empty?
-            ret['time'] = time if time
-            if move['special']
-              ret['special'] = move['special']
-            else
-              ret['move'] = move
-            end
-            ret
-          end.call(s1, s2, s3)
+          return :failed
         end
-        s0
+
+        s2 = parse_time
+        s2 = nil if s2 == :failed
+        s3 = parse_comments
+        @reported_pos = s0
+        move, time, comments=s1, s2, s3
+        ret = {}
+        ret['comments'] = comments unless comments.empty?
+        ret['time'] = time if time
+        if move['special']
+          ret['special'] = move['special']
+        else
+          ret['move'] = move
+        end
+        ret
       end
 
       # normalmove : teban xy xy piece nl

@@ -427,19 +427,18 @@ module Jkf
         s1 = parse_firstboard
         if s1 == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          s2 = []
-          s3 = parse_move
-          while s3 != :failed
-            s2 << s3
-            s3 = parse_move
-          end
-          parse_comments
-          @reported_pos = s0
-          s0 = s2.unshift(s1)
+          return :failed
         end
-        s0
+
+        s2 = []
+        s3 = parse_move
+        while s3 != :failed
+          s2 << s3
+          s3 = parse_move
+        end
+        parse_comments
+        @reported_pos = s0
+        s0 = s2.unshift(s1)
       end
 
       # firstboard : comment*

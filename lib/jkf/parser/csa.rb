@@ -100,36 +100,38 @@ module Jkf
         parse_comments
         if match_str('$') == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          s4 = match_regexp(/[^:]/)
-          if s4 == :failed
-            s3 = :failed
-          else
-            s3 = []
-            while s4 != :failed
-              s3 << s4
-              s4 = match_regexp(/[^:]/)
-            end
-          end
-          if s3 == :failed
-            @scanner.pos = s0
-            s0 = :failed
-          elsif match_str(':') != :failed
-            s4 = parse_nonls
-            if parse_nl == :failed
-              @scanner.pos = s0
-              s0 = :failed
-            else
-              @reported_pos = s0
-              s0 = { 'k' => s3.join, 'v' => s4.join }
-            end
-          else
-            @scanner.pos = s0
-            s0 = :failed
-          end
+          return :failed
         end
-        s0
+
+        s4 = match_regexp(/[^:]/)
+        if s4 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        s3 = []
+        while s4 != :failed
+          s3 << s4
+          s4 = match_regexp(/[^:]/)
+        end
+
+        if s3 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+        if match_str(':') == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        s4 = parse_nonls
+        if parse_nl == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        @reported_pos = s0
+        { 'k' => s3.join, 'v' => s4.join }
       end
 
       # csa1 : players? initialboard? moves

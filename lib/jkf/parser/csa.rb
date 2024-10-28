@@ -644,18 +644,17 @@ module Jkf
         s1 = match_regexp(/[A-Z]/)
         if s1 == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          s2 = match_regexp(/[A-Z]/)
-          if s2 == :failed
-            @scanner.pos = s0
-            s0 = :failed
-          else
-            @reported_pos = s0
-            s0 = s1 + s2
-          end
+          return :failed
         end
-        s0
+
+        s2 = match_regexp(/[A-Z]/)
+        if s2 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        @reported_pos = s0
+        s1 + s2
       end
 
       # xypiece : xy piece

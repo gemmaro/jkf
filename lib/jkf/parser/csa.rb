@@ -69,12 +69,11 @@ module Jkf
         s2 = parse_headers
         if s2 == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          @reported_pos = s0
-          s0 = { 'players' => s1, 'header' => s2 }
+          return :failed
         end
-        s0
+
+        @reported_pos = s0
+        { 'players' => s1, 'header' => s2 }
       end
 
       # headers : header*

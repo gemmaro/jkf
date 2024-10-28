@@ -664,18 +664,17 @@ module Jkf
         s1 = parse_xy
         if s1 == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          s2 = parse_piece
-          if s2 == :failed
-            @scanner.pos = s0
-            s0 = :failed
-          else
-            @reported_pos = s0
-            s0 = { 'xy' => s1, 'piece' => s2 }
-          end
+          return :failed
         end
-        s0
+
+        s2 = parse_piece
+        if s2 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        @reported_pos = s0
+        { 'xy' => s1, 'piece' => s2 }
       end
 
       # nl : ("\r"? "\n") | " "* ","

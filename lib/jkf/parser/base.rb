@@ -30,7 +30,7 @@ module Jkf
         @result != :failed
       end
 
-      def failed?; !success?; end
+      def failed? = !success?
 
       def match_regexp(reg)
         matched = @scanner.scan(reg)

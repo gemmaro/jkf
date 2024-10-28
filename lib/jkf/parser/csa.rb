@@ -17,29 +17,29 @@ module Jkf
         s0 = @scanner.pos
         if parse_version22 == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          s1 = parse_information
-          s1 = nil if s1 == :failed
-          s2 = parse_initial_board
-          if s2 == :failed
-            @scanner.pos = s0
-            s0 = :failed
-          else
-            s3 = parse_moves
-            s3 = nil if s3 == :failed
-            @reported_pos = s0
-            s0 = -> (info, ini, ms) do
-              ret = { 'header' => info['header'], 'initial' => ini, 'moves' => ms }
-              if info && info['players']
-                ret['header']['先手'] = info['players'][0] if info['players'][0]
-                ret['header']['後手'] = info['players'][1] if info['players'][1]
-              end
-              ret
-            end.call(s1, s2, s3)
-          end
+          return :failed
         end
-        s0
+
+        s1 = parse_information
+        s1 = nil if s1 == :failed
+        s2 = parse_initial_board
+        if s2 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        s3 = parse_moves
+        s3 = nil if s3 == :failed
+        @reported_pos = s0
+        info = s1
+        ini = s2
+        ms = s3
+        ret = { 'header' => info['header'], 'initial' => ini, 'moves' => ms }
+        if info && info['players']
+          ret['header']['先手'] = info['players'][0] if info['players'][0]
+          ret['header']['後手'] = info['players'][1] if info['players'][1]
+        end
+        ret
       end
 
       # version22 : comment* "V2.2" nl

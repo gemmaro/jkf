@@ -604,18 +604,17 @@ module Jkf
         s0 = @scanner.pos
         if match_str('T') == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          s2 = match_digits
-          if parse_nl == :failed
-            @scanner.pos = s0
-            s0 = :failed
-          else
-            @reported_pos = s0
-            s0 = { 'now' => sec2time(s2.join.to_i) }
-          end
+          return :failed
         end
-        s0
+
+        s2 = match_digits
+        if parse_nl == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        @reported_pos = s0
+        { 'now' => sec2time(s2.join.to_i) }
       end
 
       # xy : [0-9] [0-9]

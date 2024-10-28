@@ -49,17 +49,16 @@ module Jkf
         s2 = match_str('V2.2')
         if s2 == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          s3 = parse_nl
-          if s3 == :failed
-            @scanner.pos = s0
-            s0 = :failed
-          else
-            s0 = [s1, s2, s3]
-          end
+          return :failed
         end
-        s0
+
+        s3 = parse_nl
+        if s3 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        [s1, s2, s3]
       end
 
       # information : players? headers

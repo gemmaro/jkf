@@ -484,37 +484,36 @@ module Jkf
         s1 = parse_teban
         if s1 == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          s2 = parse_xy
-          if s2 == :failed
-            @scanner.pos = s0
-            s0 = :failed
-          else
-            s3 = parse_xy
-            if s3 == :failed
-              @scanner.pos = s0
-              s0 = :failed
-            else
-              s4 = parse_piece
-              if s4 == :failed
-                @scanner.pos = s0
-                s0 = :failed
-              elsif parse_nl != :failed
-                @reported_pos = s0
-                s0 = -> (color, from, to, piece) do
-                  ret = { 'color' => color, 'to' => to, 'piece' => piece }
-                  ret['from'] = from if from['x'] != 0
-                  ret
-                end.call(s1, s2, s3, s4)
-              else
-                @scanner.pos = s0
-                s0 = :failed
-              end
-            end
-          end
+          return :failed
         end
-        s0
+
+        s2 = parse_xy
+        if s2 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        s3 = parse_xy
+        if s3 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        s4 = parse_piece
+        if s4 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+        if parse_nl == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        @reported_pos = s0
+        color, from, to, piece=s1, s2, s3, s4
+        ret = { 'color' => color, 'to' => to, 'piece' => piece }
+        ret['from'] = from if from['x'] != 0
+        ret
       end
 
       # specialmove : "%" [-+_A-Z]+ nl

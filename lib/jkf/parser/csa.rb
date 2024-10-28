@@ -624,18 +624,17 @@ module Jkf
         s1 = match_digit
         if s1 == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          s2 = match_digit
-          if s2 == :failed
-            @scanner.pos = s0
-            s0 = :failed
-          else
-            @reported_pos = s0
-            s0 = { 'x' => s1.to_i, 'y' => s2.to_i }
-          end
+          return :failed
         end
-        s0
+
+        s2 = match_digit
+        if s2 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        @reported_pos = s0
+        { 'x' => s1.to_i, 'y' => s2.to_i }
       end
 
       # piece : [A-Z] [A-Z]

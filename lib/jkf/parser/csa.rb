@@ -144,19 +144,17 @@ module Jkf
         s3 = parse_moves
         if s3 == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          @reported_pos = s0
-          s0 = -> (ply, ini, ms) do
-            ret = { 'header' => {}, 'initial' => ini, 'moves' => ms }
-            if ply
-              ret['header']['先手'] = ply[0] if ply[0]
-              ret['header']['後手'] = ply[1] if ply[1]
-            end
-            ret
-          end.call(s1, s2, s3)
+          return :failed
         end
-        s0
+
+        @reported_pos = s0
+        ply, ini, ms=s1, s2, s3
+        ret = { 'header' => {}, 'initial' => ini, 'moves' => ms }
+        if ply
+          ret['header']['先手'] = ply[0] if ply[0]
+          ret['header']['後手'] = ply[1] if ply[1]
+        end
+        ret
       end
 
       # players : comment* ("N+" nonls nl)? comment* ("N-" nonls nl)?

@@ -115,7 +115,7 @@ module Jkf
 
       def convert_forks(forks, index)
         result = "\n"
-        result = "変化：%4d手\n" % [index] # ki2の場合\nなし
+        result = format("変化：%4d手\n", index) # ki2の場合\nなし
         forks.each do |moves|
           result += convert_moves(moves, index)
         end
@@ -131,9 +131,9 @@ module Jkf
         players_flag = :sengo
         jkf['header']&.keys&.detect { |key| key =~ /[上下]手/ } && players_flag = :uwasimo
         @players = if players_flag == :uwasimo
-                     ['下', '上']
+                     %w[下 上]
                    else
-                     ['先', '後']
+                     %w[先 後]
                    end
       end
 

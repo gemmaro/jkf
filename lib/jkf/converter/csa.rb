@@ -16,12 +16,8 @@ module Jkf
 
       def convert_information(header)
         result = ''
-        if header['先手'] || header['下手']
-          result += 'N+' + (header.delete('先手') || header.delete('下手') || '') + "\n"
-        end
-        if header['後手'] || header['上手']
-          result += 'N-' + (header.delete('後手') || header.delete('上手') || '') + "\n"
-        end
+        result += 'N+' + (header.delete('先手') || header.delete('下手') || '') + "\n" if header['先手'] || header['下手']
+        result += 'N-' + (header.delete('後手') || header.delete('上手') || '') + "\n" if header['後手'] || header['上手']
         header.each { |(k, v)| result += "$#{csa_header_key(k)}:#{v}\n" }
         result
       end
@@ -60,6 +56,7 @@ module Jkf
         before_pos = nil
         moves.each do |move|
           next if move == {}
+
           result += convert_move(move['move'], before_pos) if move['move']
           result += convert_special(move['special'], move['color']) if move['special']
           if move['time']
@@ -144,7 +141,7 @@ module Jkf
       end
 
       def pos2str(pos)
-        '%d%d' % [pos['x'], pos['y']]
+        format('%d%d', pos['x'], pos['y'])
       end
 
       def version

@@ -148,7 +148,9 @@ module Jkf
         end
 
         @reported_pos = s0
-        ply, ini, ms=s1, s2, s3
+        ply = s1
+        ini = s2
+        ms = s3
         ret = { 'header' => {}, 'initial' => ini, 'moves' => ms }
         if ply
           ret['header']['先手'] = ply[0] if ply[0]
@@ -229,7 +231,7 @@ module Jkf
               :failed
             elsif parse_nl != :failed
               @reported_pos = s0
-              -> (data, koma, teban) do
+              lambda do |data, koma, teban|
                 if data == 'NO'
                   data = koma
                 else
@@ -264,7 +266,7 @@ module Jkf
             s0 = :failed
           else
             @reported_pos = s0
-            s0 = -> (ps) do
+            s0 = lambda do |ps|
               ret = { 'preset' => 'OTHER', 'data' => { 'board' => hirate } }
               ps.each do |piece|
                 ret['data']['board'][piece['xy']['x'] - 1][piece['xy']['y'] - 1] = {}
@@ -291,7 +293,7 @@ module Jkf
         end
         if s1 != :failed
           @reported_pos = s0
-          s1 = -> (lines) do
+          s1 = lambda do |lines|
             board = []
             9.times do |i|
               line = []
@@ -464,7 +466,9 @@ module Jkf
         s2 = nil if s2 == :failed
         s3 = parse_comments
         @reported_pos = s0
-        move, time, comments=s1, s2, s3
+        move = s1
+        time = s2
+        comments = s3
         ret = {}
         ret['comments'] = comments unless comments.empty?
         ret['time'] = time if time
@@ -508,7 +512,10 @@ module Jkf
         end
 
         @reported_pos = s0
-        color, from, to, piece=s1, s2, s3, s4
+        color = s1
+        from = s2
+        to = s3
+        piece = s4
         ret = { 'color' => color, 'to' => to, 'piece' => piece }
         ret['from'] = from if from['x'] != 0
         ret

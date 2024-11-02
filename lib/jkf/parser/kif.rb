@@ -539,9 +539,7 @@ module Jkf
         end
         transform_root_header_data(ret) if ret['initial'] && ret['initial']['data']
         transform_root_forks(forks, moves)
-        if ret['initial'] && ret['initial']['data'] && ret['initial']['data']['color'] == 1
-          reverse_color(ret['moves'])
-        end
+        reverse_color(ret['moves']) if ret['initial'] && ret['initial']['data'] && ret['initial']['data']['color'] == 1
         ret
       end
 
@@ -600,6 +598,7 @@ module Jkf
 
         str.split(/[ 　]/).each do |kind|
           next if kind.empty?
+
           ret[kind2csa(kind[0])] = kind.length == 1 ? 1 : kan2n2(kind[1..-1])
         end
 
@@ -609,9 +608,7 @@ module Jkf
       # exchange sente gote
       def reverse_color(moves)
         moves.each do |move|
-          if move['move'] && move['move']['color']
-            move['move']['color'] = (move['move']['color'] + 1) % 2
-          end
+          move['move']['color'] = (move['move']['color'] + 1) % 2 if move['move'] && move['move']['color']
           move['forks']&.each { |fork| reverse_color(fork) }
         end
       end

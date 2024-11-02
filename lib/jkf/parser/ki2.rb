@@ -130,7 +130,7 @@ module Jkf
           s3 = parse_result
           s3 = nil if s3 == :failed
           @reported_pos = s0
-          s0 = -> (hd, tl, res) do
+          s0 = lambda do |hd, tl, res|
             tl.unshift(hd)
             tl << { 'special' => res } if res && !tl[tl.length - 1]['special']
             tl
@@ -177,7 +177,7 @@ module Jkf
             s5 = match_space if s5 == :failed
           end
           @reported_pos = s0
-          s0 = -> (line, c) do
+          s0 = lambda do |line, c|
             ret = { 'move' => line }
             ret['comments'] = c unless c.empty?
             ret
@@ -406,6 +406,7 @@ module Jkf
 
         str.gsub(/　$/, '').split('　').each do |kind|
           next if kind.empty?
+
           ret[kind2csa(kind[0])] = kind.length == 1 ? 1 : kan2n2(kind[1..-1])
         end
 

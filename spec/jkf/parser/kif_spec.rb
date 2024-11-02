@@ -144,7 +144,7 @@ EOS
                               'moves' => [
                                 { 'comments' => ['開始時コメント'] },
                                 { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU', 'color' => 0 },
-                                  'comments' => ['初手コメント', '初手コメント2'] },
+                                  'comments' => %w[初手コメント 初手コメント2] },
                                 { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU', 'color' => 1 } },
                                 { 'move' => { 'from' => pos(8, 8), 'to' => pos(2, 2), 'piece' => 'KA', 'color' => 0,
                                               'promote' => true } }
@@ -310,9 +310,9 @@ EOS
                                 'initial' => { 'preset' => 'HIRATE' },
                                 'moves' => [
                                   {},
-                                  { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU', 
+                                  { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU',
                                                 'color' => 0 } },
-                                  { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU', 
+                                  { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU',
                                                 'color' => 1 } },
                                   { 'move' => { 'from' => pos(8, 8), 'to' => pos(2, 2), 'piece' => 'KA', 'color' => 0,
                                                 'promote' => true } },
@@ -334,15 +334,16 @@ EOS
                                 'initial' => { 'preset' => '6' },
                                 'moves' => [
                                   {},
-                                  { 'move' => { 'from' => pos(5, 1), 'to' => pos(4, 2), 'piece' => 'OU', 
+                                  { 'move' => { 'from' => pos(5, 1), 'to' => pos(4, 2), 'piece' => 'OU',
                                                 'color' => 0 } },
-                                  { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU', 
+                                  { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU',
                                                 'color' => 1 } },
-                                  { 'move' => { 'from' => pos(3, 1), 'to' => pos(2, 2), 'piece' => 'GI', 
+                                  { 'move' => { 'from' => pos(3, 1), 'to' => pos(2, 2), 'piece' => 'GI',
                                                 'color' => 0 } },
-                                  { 'move' => { 'from' => pos(8, 8), 'to' => pos(6, 6), 'piece' => 'KA', 
+                                  { 'move' => { 'from' => pos(8, 8), 'to' => pos(6, 6), 'piece' => 'KA',
                                                 'color' => 1 } },
-                                  { 'move' => { 'from' => pos(7, 1), 'to' => pos(8, 2), 'piece' => 'GI', 'color' => 0 } }
+                                  { 'move' => { 'from' => pos(7, 1), 'to' => pos(8, 2), 'piece' => 'GI',
+                                                'color' => 0 } }
                                 ] })
       end
     end
@@ -511,9 +512,9 @@ EOS
                                 'initial' => { 'preset' => 'HIRATE' },
                                 'moves' => [
                                   {},
-                                  { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU', 
+                                  { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU',
                                                 'color' => 0 } },
-                                  { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU', 
+                                  { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU',
                                                 'color' => 1 } },
                                   { 'move' => { 'from' => pos(8, 8), 'to' => pos(2, 2),
                                                 'piece' => 'KA', 'color' => 0, 'promote' => true },
@@ -600,9 +601,9 @@ EOS
                                 },
                                 'moves' => [
                                   {},
-                                  { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU', 
+                                  { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU',
                                                 'color' => 1 } },
-                                  { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU', 
+                                  { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU',
                                                 'color' => 0 } },
                                   {
                                     'move' => { 'from' => pos(2, 2), 'to' => pos(8, 8), 'piece' => 'KA', 'color' => 1,
@@ -644,7 +645,7 @@ EOS
                                   { 'comments' => ['開始コメント'] },
                                   { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU', 'color' => 0 },
                                     'comments' => ['初手コメント'] },
-                                  { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU', 
+                                  { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU',
                                                 'color' => 1 } },
                                   { 'move' => { 'from' => pos(8, 8), 'to' => pos(2, 2), 'piece' => 'KA', 'color' => 0,
                                                 'promote' => true } },
@@ -676,7 +677,7 @@ EOS
                                   { 'comments' => ['開始コメント'] },
                                   { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU', 'color' => 0 },
                                     'comments' => ['初手コメント'] },
-                                  { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU', 
+                                  { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU',
                                                 'color' => 1 } },
                                   { 'move' => { 'from' => pos(8, 8), 'to' => pos(2, 2), 'piece' => 'KA', 'color' => 0,
                                                 'promote' => true } },
@@ -696,13 +697,12 @@ EOS
         expect(subject).to eq({ 'header' => {},
                                 'moves' => [
                                   {},
-                                  { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU', 
+                                  { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU',
                                                 'color' => 0 } },
-                                  { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU', 
+                                  { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU',
                                                 'color' => 1 } },
                                   { 'move' => { 'from' => pos(8, 8), 'to' => pos(2, 2), 'piece' => 'KA', 'color' => 0,
-                                                'promote' => true }
-                                  },
+                                                'promote' => true } },
                                   { 'move' => { 'from' => pos(3, 1), 'same' => true, 'piece' => 'GI', 'color' => 1 } },
                                   { 'move' => { 'to' => pos(4, 5), 'piece' => 'KA', 'color' => 0 } }
                                 ] })
@@ -718,7 +718,7 @@ EOS
         expect(subject).to eq({ 'header' => {},
                                 'moves' => [
                                   {},
-                                  { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU', 
+                                  { 'move' => { 'from' => pos(7, 7), 'to' => pos(7, 6), 'piece' => 'FU',
                                                 'color' => 0 } },
                                   { 'move' => { 'from' => pos(3, 3), 'to' => pos(3, 4), 'piece' => 'FU', 'color' => 1 },
                                     'comments' => ['&読み込み時表示'] },

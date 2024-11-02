@@ -35,13 +35,13 @@ describe Jkf::Converter::Kif do
       KIF
     }
 
-    let(:handicap_hash) {
+    let(:handicap_hash) do
       {
         'header' => { '手合割' => '十枚落ち' },
         'moves' => [{}, { 'special' => 'TORYO' }],
         'initial' => { 'preset' => '10' }
       }
-    }
+    end
 
     it 'is convert' do
       expect(subject).to eq kif_converter.convert(handicap_hash)

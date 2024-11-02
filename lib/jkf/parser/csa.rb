@@ -313,36 +313,39 @@ module Jkf
         s0 = @scanner.pos
         if match_str('P') == :failed
           @scanner.pos = s0
-          s0 = :failed
-        elsif match_digit != :failed
-          s4 = parse_masu
-          if s4 == :failed
-            s3 = :failed
-          else
-            s3 = []
-            while s4 != :failed
-              s3 << s4
-              s4 = parse_masu
-            end
-          end
-          if s3 == :failed
-            @scanner.pos = s0
-            s0 = :failed
-          else
-            s4 = parse_nl
-            if s4 == :failed
-              @scanner.pos = s0
-              s0 = :failed
-            else
-              @reported_pos = s0
-              s0 = s3
-            end
-          end
-        else
-          @scanner.pos = s0
-          s0 = :failed
+          return :failed
         end
-        s0
+
+        if match_digit == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        s4 = parse_masu
+        if s4 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        s3 = []
+        while s4 != :failed
+          s3 << s4
+          s4 = parse_masu
+        end
+
+        if s3 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        s4 = parse_nl
+        if s4 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        @reported_pos = s0
+        s3
       end
 
       # masu : teban piece | " * "

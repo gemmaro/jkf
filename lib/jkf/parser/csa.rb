@@ -530,30 +530,33 @@ module Jkf
         s1 = match_str('%')
         if s1 == :failed
           @scanner.pos = s0
-          s0 = :failed
-        else
-          s3 = match_regexp(/[-+_A-Z]/)
-          if s3 == :failed
-            s2 = :failed
-          else
-            s2 = []
-            while s3 != :failed
-              s2 << s3
-              s3 = match_regexp(/[-+_A-Z]/)
-            end
-          end
-          if s2 == :failed
-            @scanner.pos = s0
-            s0 = :failed
-          elsif parse_nl != :failed
-            @reported_pos = s0
-            s0 = { 'special' => s2.join }
-          else
-            @scanner.pos = s0
-            s0 = :failed
-          end
+          return :failed
         end
-        s0
+
+        s3 = match_regexp(/[-+_A-Z]/)
+        if s3 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        s2 = []
+        while s3 != :failed
+          s2 << s3
+          s3 = match_regexp(/[-+_A-Z]/)
+        end
+
+        if s2 == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        if parse_nl == :failed
+          @scanner.pos = s0
+          return :failed
+        end
+
+        @reported_pos = s0
+        { 'special' => s2.join }
       end
 
       # teban : "+" | "-"

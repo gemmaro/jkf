@@ -230,8 +230,7 @@ EOS
                                         { 'move' => { 'to' => pos(6, 6), 'piece' => 'FU', 'color' => 0 } },
                                         { 'move' => { 'to' => pos(8, 4), 'piece' => 'FU', 'color' => 1 } }
                                       ]
-                                    ]
-                                  },
+                                    ] },
                                   { 'move' => { 'same' => true, 'piece' => 'GI', 'color' => 1 } },
                                   { 'move' => { 'to' => pos(4, 5), 'piece' => 'KA', 'color' => 0 } },
                                   { 'special' => 'CHUDAN' }

@@ -479,7 +479,7 @@ module Jkf
         end
       end
 
-      # nonl : 
+      # nonl :
       def parse_nonl
         match_regexp(/[^\r\n]/)
       end
@@ -517,7 +517,7 @@ module Jkf
           make_hand(ret['header']['先手の持駒'] || ret['header']['下手の持駒']),
           make_hand(ret['header']['後手の持駒'] || ret['header']['上手の持駒'])
         ]
-        %w(先手の持駒 下手の持駒 後手の持駒 上手の持駒).each do |key|
+        %w[先手の持駒 下手の持駒 後手の持駒 上手の持駒].each do |key|
           ret['header'].delete(key)
         end
       end

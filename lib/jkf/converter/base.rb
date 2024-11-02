@@ -3,7 +3,7 @@ module Jkf
     # Base of Converter
     class Base
       # start convert
-      # 
+      #
       # @param [String, Hash] jkf
       # @return [String] kif or ki2 or csa text
       def convert(jkf)

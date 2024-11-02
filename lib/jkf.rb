@@ -49,6 +49,7 @@ module Jkf
         break
       end
       raise FileTypeError if result.nil?
+
       result
     end
   end

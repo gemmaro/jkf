@@ -1,6 +1,6 @@
-scope(groups: %w(specs))
+scope(groups: %w[specs])
 
-directories %w(spec lib)
+directories %w[spec lib]
 
 group :specs, halt_on_fail: true do
   guard :rspec, cmd: 'bundle exec rspec', failed_mode: :keep do
@@ -19,7 +19,7 @@ group :specs, halt_on_fail: true do
   end
 
   guard :rubocop, all_on_start: false, cli: '--rails' do
-    watch(%r{.+\.rb$}) { |m| m[0] }
+    watch(/.+\.rb$/) { |m| m[0] }
     watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
   end
 end

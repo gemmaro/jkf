@@ -5,7 +5,7 @@ require 'jkf/version'
 Gem::Specification.new do |spec|
   spec.name = 'jkf'
   spec.version = Jkf::VERSION
-  spec.authors = ['iyuuya', 'gemmaro']
+  spec.authors = %w[iyuuya gemmaro]
   spec.email = ['i.yuuya@gmail.com', 'gemmaro.dev@gmail.com']
 
   spec.summary = 'Shogi formats parser and converter'

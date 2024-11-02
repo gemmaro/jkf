@@ -57,7 +57,7 @@ module Jkf
       end
 
       def convert_move_line(move, index)
-        result = '%4d ' % [index]
+        result = format('%4d ', index)
         result += convert_move(move['move'])
         result += convert_time(move['time']) if move['time']
         result += '+' if move['forks']
@@ -65,7 +65,7 @@ module Jkf
       end
 
       def convert_special_line(move, index)
-        result = '%4d ' % [index]
+        result = format('%4d ', index)
         result += ljust(special2kan(move['special']), 13)
         result += convert_time(move['time']) if move['time']
         result += '+' if move['forks']
@@ -85,13 +85,8 @@ module Jkf
       end
 
       def convert_time(time)
-        '(%2d:%02d/%02d:%02d:%02d)' % [
-          time['now']['m'],
-          time['now']['s'],
-          time['total']['h'],
-          time['total']['m'],
-          time['total']['s']
-        ]
+        format('(%2d:%02d/%02d:%02d:%02d)', time['now']['m'], time['now']['s'], time['total']['h'], time['total']['m'],
+               time['total']['s'])
       end
 
       def special2kan(special)
@@ -119,7 +114,7 @@ module Jkf
       end
 
       def pos2str(pos)
-        '%d%d' % [pos['x'], pos['y']]
+        format('%d%d', pos['x'], pos['y'])
       end
     end
   end

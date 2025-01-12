@@ -33,13 +33,7 @@ module IncludeHelper
     { 'm' => m, 's' => s }
   end
 
-  def fixtures(type)
-    Dir[File.expand_path("../fixtures/#{type}/**", __FILE__)]
-  end
-
-  def error_fixtures(type)
-    Dir[File.expand_path("../error_fixtures/#{type}/**", __FILE__)]
-  end
+  include ExtendHelper
 end
 
 RSpec.configure do |config|

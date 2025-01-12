@@ -14,7 +14,7 @@ module Jkf
     #
     # @return [String] KIF, KI2, CSA, JKF(JSON)
     def parse_file(filename, encoding: 'Shift_JIS')
-      parser = case ::File.extname(filename)
+      parser = case (name = ::File.extname(filename))
                when /kif/
                  ::Jkf::Parser::Kif.new
                when /ki2/
@@ -24,7 +24,7 @@ module Jkf
                when /jkf|json/
                  JSON
                else
-                 raise FileTypeError
+                 raise FileTypeError, name
                end
       str = File.read(File.expand_path(filename), encoding: encoding).toutf8
       parser.parse(str)

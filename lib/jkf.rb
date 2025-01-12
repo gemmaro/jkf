@@ -5,8 +5,7 @@ require_relative 'jkf/converter'
 
 # JSON Kifu Format
 module Jkf
-  # raise when unsupport file type
-  class FileTypeError < StandardError; end
+  FileTypeError = Class.new(StandardError)
 
   class << self
     # ファイルからパースします。拡張子でフォーマットの判定をします。

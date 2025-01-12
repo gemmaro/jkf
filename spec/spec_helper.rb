@@ -5,7 +5,7 @@ ENV['SKIP_SIMPLECOV'] or
   end
 
 require 'kconv'
-require 'pry'
+require "debug"
 
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 require 'jkf'

@@ -1,0 +1,1 @@
+* TODO [[file:spec/jkf/converter/kif_spec.rb::it "is parse #{basename}", skip: "1970-9-15.kif" == basename do][誤って処理されているKIF形式の構文解析処理を修正する]]

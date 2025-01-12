@@ -568,7 +568,7 @@ module Jkf
         when 2
           '〇一二三四五六七八九十'.index(s[1]) + 10
         else
-          raise '21以上の数値に対応していません'
+          raise ParseError, '21以上の数値に対応していません'
         end
       end
 

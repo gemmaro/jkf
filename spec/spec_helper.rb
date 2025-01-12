@@ -12,11 +12,11 @@ require 'jkf'
 
 module ExtendHelper
   def fixtures(type)
-    Dir[File.join(__dir__, "fixtures/#{type}/**")]
+    Dir[File.join(__dir__, "fixtures/#{type}/**/*.*")]
   end
 
   def error_fixtures(type)
-    Dir[File.join(__dir__, "../error_fixtures/#{type}/**")]
+    Dir[File.join(__dir__, "../error_fixtures/#{type}/**/*.*")]
   end
 end
 

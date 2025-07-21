@@ -1,11 +1,13 @@
 (use-modules ((guix licenses)
               #:prefix license:)
              (gnu packages ruby)
+             (gnu packages ruby-check)
+             (gnu packages ruby-xyz)
              (guix build-system ruby)
              (guix download)
-             (guix git)
              (guix packages)
-             (guix git-download))
+             (guix git-download)
+             (guix profiles))
 
 (packages->manifest (list ruby-rake
                           ruby-yard

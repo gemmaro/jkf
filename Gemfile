@@ -8,7 +8,6 @@ group :development do
   gem 'redcarpet'
   gem 'yard'
 
-  gem 'guard-rubocop'
   gem 'rubocop', '~> 1.63'
   gem 'rubocop-performance'
   gem 'rubocop-rake', '~> 0.6.0'
@@ -16,7 +15,6 @@ group :development do
 end
 
 group :test do
-  gem 'guard-rspec'
   gem 'rspec', '~> 3.0'
   gem 'simplecov'
 end

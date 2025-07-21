@@ -5,7 +5,6 @@ gemspec
 gem 'rake'
 
 group :development do
-  gem 'redcarpet'
   gem 'yard'
 
   gem 'rubocop', '~> 1.63'

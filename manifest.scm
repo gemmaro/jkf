@@ -11,7 +11,6 @@
 
 (packages->manifest (list ruby-rake
                           ruby-yard
-                          ruby-redcarpet
                           ruby-rubocop
                           ruby-rubocop-rake
                           ruby-rubocop-rspec

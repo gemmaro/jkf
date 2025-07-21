@@ -22,4 +22,6 @@ Gem::Specification.new do |spec|
     'rubygems_mfa_required' => 'true',
     'documentation_uri' => 'https://www.rubydoc.info/gems/jkf'
   }
+
+  spec.add_development_dependency "rake"
 end

@@ -11,11 +11,7 @@
 
 (packages->manifest (list ruby-rake
                           ruby-yard
-                          ruby-rubocop
-                          ruby-rubocop-rake
-                          ruby-rubocop-rspec
                           ruby-rspec
                           ruby-simplecov
                           ruby-benchmark-ips
-                          ruby-rubocop-performance
                           ruby))

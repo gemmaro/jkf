@@ -68,6 +68,12 @@ POTファイルの生成には`rdoc --format pot`とします。
 このPOTファイルから各言語のPOファイルを初期化できます。
 例えば`msginit -i doc/rdoc.pot -o po/en.rdoc.po --locale en_US.UTF-8`です。
 
+## 謝辞
+
+このプロジェクトは[GitHubのiyuuya/jkf](https://github.com/iyuuya/jkf)を元にしています。
+そこから[GitHubのgemmaro/jkf](https://github.com/gemmaro/jkf)にフォークされました。
+現在の開発は[SourceForgeのjkf](https://sourceforge.net/projects/ruby-jkf/)に移っています。
+
 ## 利用許諾
 
 ライセンスは[MIT License][mit]です。

@@ -1,7 +1,5 @@
 # jkf gem
 
-[![Gem Version](https://badge.fury.io/rb/jkf.svg)](https://badge.fury.io/rb/jkf) [![Build Status](https://travis-ci.org/iyuuya/jkf.svg?branch=master)](https://travis-ci.org/iyuuya/jkf) [![CI](https://github.com/iyuuya/jkf/actions/workflows/ci.yml/badge.svg)](https://github.com/iyuuya/jkf/actions/workflows/ci.yml)
-
 jkf gemは[JSON棋譜フォーマット (JKF)][jkf]をRubyに移植したものです。
 柿木形式（[棋譜ファイル KIF 形式][kakinoki]、KI2）、[CSA標準棋譜ファイル形式][csa]の構文解析とJKFへの変換、JKFからKIF, KI2, CSAへの変換に対応しています。
 

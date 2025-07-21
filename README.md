@@ -53,9 +53,9 @@ csa = csa_converter.convert(jkf) #=> String
 
 ## 貢献
 
-バグレポートやプルリクエストは[GitHubのリポジトリ][repo]でよろしくお願いします。
+バグレポートやプルリクエストは[リポジトリ][repo]でよろしくお願いします。
 
-[repo]: https://github.com/iyuuya/jkf
+[repo]: https://sourceforge.net/p/ruby-jkf/code/
 
 Guixで開発されている場合は`guix shell`で`rake test`によるテスト実行ができます。
 

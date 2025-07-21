@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = 'Shogi formats parser and converter'
   spec.description = 'The jkf gem provides parsers and converters (generaters) for several shogi formats, including json-kifu-format, KIF, KI2, and CSA.'
-  spec.homepage = 'https://github.com/iyuuya/jkf'
+  spec.homepage = 'https://sourceforge.net/projects/ruby-jkf/'
   spec.license = 'MIT'
 
   spec.required_ruby_version = '>= 3.0'

@@ -8,34 +8,34 @@ module Jkf
 
       def convert_root(jkf)
         result = version
-        result += convert_information(jkf['header']) if jkf['header']
-        result += convert_initial(jkf['initial']) if jkf['initial']
-        result += convert_moves(jkf['moves']) if jkf['moves']
+        result << convert_information(jkf['header']) if jkf['header']
+        result << convert_initial(jkf['initial']) if jkf['initial']
+        result << convert_moves(jkf['moves']) if jkf['moves']
         result
       end
 
       def convert_information(header)
         result = ''
-        result += 'N+' + (header.delete('先手') || header.delete('下手') || '') + "\n" if header['先手'] || header['下手']
-        result += 'N-' + (header.delete('後手') || header.delete('上手') || '') + "\n" if header['後手'] || header['上手']
-        header.each { |(k, v)| result += "$#{csa_header_key(k)}:#{v}\n" }
+        result << 'N+' + (header.delete('先手') || header.delete('下手') || '') + "\n" if header['先手'] || header['下手']
+        result << 'N-' + (header.delete('後手') || header.delete('上手') || '') + "\n" if header['後手'] || header['上手']
+        header.each { |(k, v)| result << "$#{csa_header_key(k)}:#{v}\n" }
         result
       end
 
       def convert_initial(initial)
         result = ''
         data = initial['data'] || {}
-        result += if initial['preset'] == 'OTHER'
+        result << if initial['preset'] == 'OTHER'
                     convert_board(data['board'])
                   else
                     convert_preset(initial['preset'])
                   end
         # 持駒
         if data['hands']
-          result += convert_hands(data['hands'], 0)
-          result += convert_hands(data['hands'], 1)
+          result << convert_hands(data['hands'], 0)
+          result << convert_hands(data['hands'], 1)
         end
-        result += csa_color(data['color']) + "\n" if data['color']
+        result << csa_color(data['color']) + "\n" if data['color']
         result
       end
 
@@ -44,9 +44,9 @@ module Jkf
         sum = 0
         hands[color].each_value { |n| sum += n }
         if sum > 0
-          result += "P#{csa_color(color)}"
-          hands[color].to_a.reverse_each { |(k, v)| v.times { result += "00#{k}" } }
-          result += "\n"
+          result << "P#{csa_color(color)}"
+          hands[color].to_a.reverse_each { |(k, v)| v.times { result << "00#{k}" } }
+          result << "\n"
         end
         result
       end
@@ -57,14 +57,14 @@ module Jkf
         moves.each do |move|
           next if move == {}
 
-          result += convert_move(move['move'], before_pos) if move['move']
-          result += convert_special(move['special'], move['color']) if move['special']
+          result << convert_move(move['move'], before_pos) if move['move']
+          result << convert_special(move['special'], move['color']) if move['special']
           if move['time']
-            result += ',' + convert_time(move['time'])
+            result << ',' + convert_time(move['time'])
           elsif move['move'] || move['special']
-            result += "\n"
+            result << "\n"
           end
-          result += convert_comments(move['comments']) if move['comments']
+          result << convert_comments(move['comments']) if move['comments']
           before_pos = move['move']['to'] if move['move'] && move['move']['to']
         end
         result
@@ -72,8 +72,8 @@ module Jkf
 
       def convert_move(move, before_pos)
         result = csa_color(move['color'])
-        result += move['from'] ? pos2str(move['from']) : '00'
-        result += if move['to']
+        result << (move['from'] ? pos2str(move['from']) : '00')
+        result << if move['to']
                     pos2str(move['to']) + move['piece']
                   else
                     pos2str(before_pos) + move['piece']
@@ -83,8 +83,8 @@ module Jkf
 
       def convert_special(special, color = nil)
         result = '%'
-        result += csa_color(color) if color
-        result + special
+        result << csa_color(color) if color
+        result << special
       end
 
       def convert_time(time)
@@ -99,22 +99,22 @@ module Jkf
       def convert_board(board)
         result = ''
         9.times do |y|
-          result += "P#{y + 1}"
+          result << "P#{y + 1}"
           9.times do |x|
             piece = board[8 - x][y]
-            result += if piece == {}
+            result << if piece == {}
                         ' * '
                       else
                         csa_color(piece['color']) + piece['kind']
                       end
           end
-          result += "\n"
+          result << "\n"
         end
         result
       end
 
       def convert_preset(preset)
-        'PI' + PRESET_NAME_TO_CSA_MAPPING[preset]
+        'PI' << PRESET_NAME_TO_CSA_MAPPING[preset]
       end
 
       PRESET_NAME_TO_CSA_MAPPING = {

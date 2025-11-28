@@ -10,16 +10,16 @@ module Jkf
 
         data = initial['data']
         if data
-          result += convert_teban(data, 1)
+          result << convert_teban(data, 1)
           if (hands = data['hands'])
-            result += convert_hands(hands, 1) if hands[1]
-            footer += convert_hands(hands, 0) if hands[0]
+            result << convert_hands(hands, 1) if hands[1]
+            footer << convert_hands(hands, 0) if hands[0]
           end
-          footer += convert_teban(data, 0)
+          footer << convert_teban(data, 0)
 
-          result += convert_board(data['board']) if data['board']
+          result << convert_board(data['board']) if data['board']
         end
-        result + footer
+        result << footer
       end
 
       def convert_handicap(preset)
@@ -39,12 +39,12 @@ module Jkf
         9.times do |y|
           line = '|'
           9.times do |x|
-            line += convert_board_piece(board[8 - x][y])
+            line << convert_board_piece(board[8 - x][y])
           end
-          line += "|#{n2kan(y + 1)}\n"
-          result += line
+          line << "|#{n2kan(y + 1)}\n"
+          result << line
         end
-        result + "+---------------------------+\n"
+        result << "+---------------------------+\n"
       end
 
       def convert_comments(comments)
@@ -56,9 +56,9 @@ module Jkf
           if num > 0
             str = csa2kind(piece)
             if num > 1
-              str += n2kan(num / 10) if num / 10 > 0
+              str << n2kan(num / 10) if num / 10 > 0
               num %= 10
-              str += n2kan(num)
+              str << n2kan(num)
             end
             str
           end
@@ -71,8 +71,8 @@ module Jkf
         if piece == {}
           result = ' ・'
         else
-          result += piece['color'] == 0 ? ' ' : 'v'
-          result += csa2kind(piece['kind'])
+          result << (piece['color'] == 0 ? ' ' : 'v')
+          result << csa2kind(piece['kind'])
         end
 
         result
@@ -83,13 +83,13 @@ module Jkf
 
         if special == 'TORYO' || special.include?('ILLEGAL')
           turn = @players[index % 2]
-          result += "で#{turn}手の"
-          result += { 'TORYO' => '勝ち',
+          result << "で#{turn}手の"
+          result << { 'TORYO' => '勝ち',
                       'ILLEGAL_ACTION' => '反則勝ち',
                       'ILLEGAL_MOVE' => '反則負け' }[special]
         else
           turn = @players[(index + 1) % 2]
-          result += case special
+          result << case special
                     when 'TIME_UP' then "で時間切れにより#{turn}手の勝ち"
                     when 'CHUDAN' then 'で中断'
                     when 'JISHOGI' then 'で持将棋'
@@ -99,7 +99,7 @@ module Jkf
                     end
         end
 
-        result + "\n"
+        result << "\n"
       end
 
       def convert_piece_with_pos(move)
@@ -108,8 +108,8 @@ module Jkf
                  elsif move['same']
                    '同　'
                  end
-        result += csa2kind(move['piece'])
-        result += '成' if move['promote']
+        result << csa2kind(move['piece'])
+        result << '成' if move['promote']
         result
       end
 
@@ -117,7 +117,7 @@ module Jkf
         result = "\n"
         result = format("変化：%4d手\n", index) # ki2の場合\nなし
         forks.each do |moves|
-          result += convert_moves(moves, index)
+          result << convert_moves(moves, index)
         end
         result
       end

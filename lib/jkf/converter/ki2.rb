@@ -11,13 +11,13 @@ module Jkf
         setup_players!(jkf)
 
         result = ''
-        result += convert_header(jkf['header']) if jkf['header']
-        result += convert_initial(jkf['initial']) if jkf['initial']
-        result += @header2.join + "\n"
-        result += convert_moves(jkf['moves']) if jkf['moves']
+        result << convert_header(jkf['header']) if jkf['header']
+        result << convert_initial(jkf['initial']) if jkf['initial']
+        result << @header2.join + "\n"
+        result << convert_moves(jkf['moves']) if jkf['moves']
         unless @forks.empty?
-          result += "\n"
-          result += @forks.join("\n")
+          result << "\n"
+          result << @forks.join("\n")
         end
 
         result
@@ -53,22 +53,22 @@ module Jkf
         moves.each_with_index do |move, i|
           if move['special']
             # first_board+speical分を引く(-2)
-            result += convert_special_and_split(move, i + idx - 2)
+            result << convert_special_and_split(move, i + idx - 2)
           else
-            result += before_split
+            result << before_split
             if move['move']
               j += 1
               result_move, before_split = convert_move_and_split(move, j)
-              result += result_move
+              result << result_move
             end
 
             if move['comments']
               unless result.end_with?("\n") || result.empty?
-                result += "\n"
+                result << "\n"
                 before_split = ''
                 j = 0
               end
-              result += convert_comments(move['comments'])
+              result << convert_comments(move['comments'])
             end
 
             @forks.unshift convert_forks(move['forks'], i + idx) if move['forks']
@@ -93,8 +93,8 @@ module Jkf
 
       def convert_move(move)
         result = move['color'] == 0 ? '▲' : '△'
-        result += convert_piece_with_pos(move)
-        result += csa2relative(move['relative']) if move['relative']
+        result << convert_piece_with_pos(move)
+        result << csa2relative(move['relative']) if move['relative']
         result
       end
 

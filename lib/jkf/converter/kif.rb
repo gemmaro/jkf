@@ -11,14 +11,14 @@ module Jkf
         setup_players!(jkf)
 
         result = ''
-        result += convert_header(jkf['header'], jkf) if jkf['header']
-        result += convert_initial(jkf['initial']) if jkf['initial']
-        result += @header2.join
-        result += "手数----指手---------消費時間--\n"
-        result += convert_moves(jkf['moves'])
+        result << convert_header(jkf['header'], jkf) if jkf['header']
+        result << convert_initial(jkf['initial']) if jkf['initial']
+        result << @header2.join
+        result << "手数----指手---------消費時間--\n"
+        result << convert_moves(jkf['moves'])
         unless @forks.empty?
-          result += "\n"
-          result += @forks.join("\n")
+          result << "\n"
+          result << @forks.join("\n")
         end
 
         result
@@ -46,10 +46,10 @@ module Jkf
         result = ''
         moves.each_with_index do |move, i|
           if move['special']
-            result += convert_special_line(move, i + idx)
+            result << convert_special_line(move, i + idx)
           else
-            result += convert_move_line(move, i + idx) if move['move']
-            result += convert_comments(move['comments']) if move['comments']
+            result << convert_move_line(move, i + idx) if move['move']
+            result << convert_comments(move['comments']) if move['comments']
             @forks.unshift convert_forks(move['forks'], i + idx) if move['forks']
           end
         end
@@ -58,25 +58,25 @@ module Jkf
 
       def convert_move_line(move, index)
         result = format('%4d ', index)
-        result += convert_move(move['move'])
-        result += convert_time(move['time']) if move['time']
-        result += '+' if move['forks']
-        result + "\n"
+        result << convert_move(move['move'])
+        result << convert_time(move['time']) if move['time']
+        result << '+' if move['forks']
+        result << "\n"
       end
 
       def convert_special_line(move, index)
         result = format('%4d ', index)
-        result += ljust(special2kan(move['special']), 13)
-        result += convert_time(move['time']) if move['time']
-        result += '+' if move['forks']
-        result += "\n"
+        result << ljust(special2kan(move['special']), 13)
+        result << convert_time(move['time']) if move['time']
+        result << '+' if move['forks']
+        result << "\n"
         # first_board+speical分を引く(-2)
-        result + convert_special(move['special'], index - 2)
+        result << convert_special(move['special'], index - 2)
       end
 
       def convert_move(move)
         result = convert_piece_with_pos(move)
-        result += if move['from']
+        result << if move['from']
                     "(#{pos2str(move['from'])})"
                   else
                     '打'

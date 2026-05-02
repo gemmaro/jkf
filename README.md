@@ -55,7 +55,7 @@ csa = csa_converter.convert(jkf) #=> String
 
 バグレポートやプルリクエストは[リポジトリ][repo]でよろしくお願いします。
 
-[repo]: https://sourceforge.net/p/ruby-jkf/code/
+[repo]: https://github.com/gemmaro/jkf
 
 Guixで開発されている場合は`guix shell`で`rake test`によるテスト実行ができます。
 
@@ -70,7 +70,7 @@ POTファイルの生成には`rdoc --format pot`とします。
 
 このプロジェクトは[GitHubのiyuuya/jkf](https://github.com/iyuuya/jkf)を元にしています。
 そこから[GitHubのgemmaro/jkf](https://github.com/gemmaro/jkf)にフォークされました。
-現在の開発は[SourceForgeのjkf](https://sourceforge.net/projects/ruby-jkf/)に移っています。
+現在の開発はこのGitHubリポジトリに移っています（一時期[SourceForge](https://sourceforge.net/projects/ruby-jkf/)を試していましたがTrusted PublishingのためにGitHubに戻します）。
 
 ## 利用許諾
 
